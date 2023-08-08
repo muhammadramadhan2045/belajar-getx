@@ -25,16 +25,32 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Getx State Management'),
         ),
-        body: Center(
-            child: GetX<CounterController>(
-          init: CounterController(),
-          builder: (controller) => Text(
-            'Counter Value is ${controller.count}',
-            style: const TextStyle(
-              fontSize: 27,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: GetBuilder<CounterController>(
+                init: CounterController(),
+                id: 'counter',
+                builder: (controller) => Text(
+                  'Counter Value is ${controller.count}',
+                  style: const TextStyle(
+                    fontSize: 27,
+                  ),
+                ),
+              ),
             ),
-          ),
-        )),
+            GetBuilder<CounterController>(
+              init: CounterController(),
+              builder: (controller) => Text(
+                'Counter Value is ${controller.count}',
+                style: const TextStyle(
+                  fontSize: 27,
+                ),
+              ),
+            ),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Get.find<CounterController>().increment();
