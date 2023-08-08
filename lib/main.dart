@@ -10,36 +10,37 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  var orang = Orang();
+  var orang = Orang(nama: 'Rizki', umur: 20).obs;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => MaterialApp(
-        title: 'Getx State Management',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return MaterialApp(
+      title: 'Getx State Management',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Getx State Management'),
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Getx State Management'),
-          ),
-          body: Center(
-            child: Obx(
-              () => Text(
-                'Nama saya adalah ${orang.nama.value}',
-                style: const TextStyle(
-                  fontSize: 27,
-                ),
+        body: Center(
+          child: Obx(
+            () => Text(
+              'Nama saya adalah ${orang.value.nama} dan umur saya ${orang.value.umur} tahun',
+              style: const TextStyle(
+                fontSize: 27,
               ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              orang.nama.value = orang.nama.value.toString().toUpperCase();
-            },
-            child: const Icon(Icons.add),
-          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            orang.update((_) {
+              orang.value.nama = orang.value.nama.toString().toUpperCase();
+              orang.value.umur = orang.value.umur + 1;
+            });
+          },
+          child: const Icon(Icons.add),
         ),
       ),
     );
