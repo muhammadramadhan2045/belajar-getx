@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
           title: const Text('Getx State Management'),
         ),
         body: Center(
-            child: GetBuilder<CounterController>(
+            child: GetX<CounterController>(
+          init: CounterController(),
           builder: (controller) => Text(
             'Counter Value is ${controller.count}',
             style: const TextStyle(
